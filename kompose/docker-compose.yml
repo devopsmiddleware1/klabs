@@ -1,0 +1,11 @@
+version: '3.0'
+services:
+   webservers:
+      image: nginx
+      ports:
+      - 8089:80/tcp
+
+   databaseservers:
+     image: redis
+     ports:
+     - 6379:6379/tcp

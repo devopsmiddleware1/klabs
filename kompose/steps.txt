@@ -1,0 +1,6 @@
+yum install -y epel-release
+yum install -y kompose
+kompose version
+kompose convert -f docker-compose.yml  -o komposeapp1.yml
+kompose up
+kompose down

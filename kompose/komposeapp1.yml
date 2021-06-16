@@ -1,0 +1,97 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml -o komposeapp1.yml
+      kompose.version: 1.7.0 (HEAD)
+    creationTimestamp: null
+    labels:
+      io.kompose.service: databaseservers
+    name: databaseservers
+  spec:
+    ports:
+    - name: "6379"
+      port: 6379
+      targetPort: 6379
+    selector:
+      io.kompose.service: databaseservers
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml -o komposeapp1.yml
+      kompose.version: 1.7.0 (HEAD)
+    creationTimestamp: null
+    labels:
+      io.kompose.service: webservers
+    name: webservers
+  spec:
+    ports:
+    - name: "8089"
+      port: 8089
+      targetPort: 80
+    selector:
+      io.kompose.service: webservers
+  status:
+    loadBalancer: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml -o komposeapp1.yml
+      kompose.version: 1.7.0 (HEAD)
+    creationTimestamp: null
+    labels:
+      io.kompose.service: databaseservers
+    name: databaseservers
+  spec:
+    replicas: 1
+    strategy: {}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: databaseservers
+      spec:
+        containers:
+        - image: redis
+          name: databaseservers
+          ports:
+          - containerPort: 6379
+          resources: {}
+        restartPolicy: Always
+  status: {}
+- apiVersion: extensions/v1beta1
+  kind: Deployment
+  metadata:
+    annotations:
+      kompose.cmd: kompose convert -f docker-compose.yml -o komposeapp1.yml
+      kompose.version: 1.7.0 (HEAD)
+    creationTimestamp: null
+    labels:
+      io.kompose.service: webservers
+    name: webservers
+  spec:
+    replicas: 1
+    strategy: {}
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          io.kompose.service: webservers
+      spec:
+        containers:
+        - image: nginx
+          name: webservers
+          ports:
+          - containerPort: 80
+          resources: {}
+        restartPolicy: Always
+  status: {}
+kind: List
+metadata: {}
+
