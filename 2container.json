@@ -1,0 +1,32 @@
+{
+  "kind": "Pod",
+  "apiVersion": "v1",
+  "metadata": {
+    "name": "tomcat-nginx",
+    "labels": {
+      "name": "tomcat-nginx"
+    }
+  },
+  "spec": {
+    "containers": [
+      {
+        "name": "tomcat",
+        "image": "middlewaredevops4/tomcatimagewithapp",
+        "ports": [
+          {
+            "containerPort": 8080
+          }
+        ]
+      },
+      {
+        "name": "nginx",
+        "image": "nginx",
+        "ports": [
+          {
+            "containerPort": 80
+          }
+        ]
+      }
+    ]
+  }
+}
