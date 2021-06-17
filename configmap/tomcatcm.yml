@@ -1,0 +1,8 @@
+kind: ConfigMap 
+apiVersion: v1 
+metadata:
+  name: tomcatconfigmap 
+data:
+  # Configuration values can be set as key-value properties
+  CATALINA_HOME: /usr/local/tomcat
+  JDBC_URL: jdbc:oracle:thin:@192.167.7.7:1521:SOCIETE

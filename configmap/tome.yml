@@ -1,0 +1,11 @@
+apiVersion: v1
+kind: Pod  
+metadata:
+  name: tomcatpodcm
+spec:
+  containers:
+    - name: tomcatconfigmap
+      image: middlewaredevops4/tomcatimagewithapp 
+      envFrom:
+        - configMapRef:
+            name: tomcatconfigmap

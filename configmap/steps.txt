@@ -1,0 +1,5 @@
+
+1. create the configmap
+2.refer it as env in pod
+3.to test the configmap
+kubectl exec -it <podname> sh
